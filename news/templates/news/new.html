@@ -1,0 +1,26 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container py-5 modal-content">
+        <h1 class="my-4">Новость {{ new.header }}</h1>
+        {% if new.image %}
+            <img class="card-img"
+                 src="/media/{{ new.image }}">
+        {% endif%}
+
+        <div class="my-4">
+            <p class="card-text">
+                {{ new.news_text }}
+            </p>
+
+            <p class="popover-header">
+                {% for tag in new.tags.all %}
+                    <a style="color: grey" href="{% url 'news_by_tag' tag.id %}">
+                        #{{ tag }}
+                    </a>
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+{% endblock %}

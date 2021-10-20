@@ -1,0 +1,34 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container py-5">
+        <h1>Статистика просмотров новостей</h1>
+        <table class="py-5">
+            <tr class="popover-header">
+                <td class="table-info table-bordered col-3">
+                    ID
+                </td>
+                <td class="table-info table-bordered col-3">
+                    Заголовок новости
+                </td>
+                <td class="table-info table-bordered col-3">
+                    Количество просмотров
+                </td>
+            </tr>
+            {% for new in news %}
+                <tr class="popover-header">
+                    <td class="table-light table-bordered col-3">
+                        {{ new.id }}
+                    </td>
+                    <td class="table-light table-bordered col-3">
+                        {{ new.header }}
+                    </td>
+                    <td class="table-light table-bordered col-3">
+                        {{ new.counter_of_viewing }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container py-5 modal-content">
+        <h1 class="my-4">Новости по тэгу #{{ title }}</h1>
+
+        {% for new in page_obj %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a style="color: black" href="{% url 'new' new.id %}">
+                <H4 class="popover-header">{{ new.header }}</H4>
+                </a>
+                <p class="popover-header">
+                    {{ new.news_text|truncatewords:5 }}
+                    <a href="{% url 'new' new.id %}">читать далее</a>
+                </p>
+                {% if new.image %}
+                    <img class="card-img-top"
+                         src="/media/{{ new.image }}">
+                {% endif%}
+                <p class="popover-header">
+                    {% for tag in new.tags.all %}
+                        <a style="color: grey" href="{% url 'news_by_tag' tag.id %}">
+                            #{{ tag }}
+                        </a>
+                    {% endfor %}
+                </p>
+            </div>
+        {% endfor %}
+
+        <div class="pagination justify-content-center">
+            <span class="page-item">
+                {% if page_obj.has_previous %}
+                    <a class="page-link" href="?page=1">&laquo; Первая страница</a>
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+                {% endif %}
+
+                <span class="page-item">
+                    Страница № {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя страница &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+{% endblock %}
