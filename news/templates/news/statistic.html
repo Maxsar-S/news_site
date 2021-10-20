@@ -22,7 +22,9 @@
                         {{ new.id }}
                     </td>
                     <td class="table-light table-bordered col-3">
-                        {{ new.header }}
+                        <a style="color: black" href="{% url 'new' new.id %}">
+                            {{ new.header }}
+                        </a>
                     </td>
                     <td class="table-light table-bordered col-3">
                         {{ new.counter_of_viewing }}
