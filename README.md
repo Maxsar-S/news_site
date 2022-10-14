@@ -1,1 +1,1 @@
-Новостной сайт написанный на Django с подключением bootstrap
+News site, written on Django using bootstrap
